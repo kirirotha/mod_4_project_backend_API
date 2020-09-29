@@ -13,20 +13,22 @@ class GamesController < ApplicationController
     def create
         @game = Game.create(game_params)
         if @game.valid?
-            render json: { auth_key: token }, status: :created
+            render json: @game, status: :created
         else
             render json: { error: 'failed to create game' }, status: :not_acceptable
         end
     end
 
     def update
-
+        @game.update(game_params)
+        @game.save
+        render json: @game, status: :updated
     end
 
     private
 
     def game_params
-        params.require(:game).permit(user1, :user2, :user1_score, :user2_score, :user1_bag, :user2_bag, :accepted, :active)
+        params.require(:game).permit(:user1_id, :user2_id, :user1_score, :user2_score, :user1_bag, :user2_bag, :accepted, :active, :player1turn)
     end
 
     def find_game

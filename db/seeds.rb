@@ -6,9 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Move.destroy_all
 Game.destroy_all
 Friendship.destroy_all
 User.destroy_all
+
 
 u1 = User.create(username: "Levi", password: "aaa")
 u2 = User.create(username: "Sofia", password: "aaa")
@@ -31,5 +33,11 @@ f9 = Friendship.create(user1_id: u2.id, user2_id: u4.id, accepted: true, active:
 f10 = Friendship.create(user1_id: u2.id, user2_id: u5.id, accepted: true, active: true)
 f11 = Friendship.create(user1_id: u2.id, user2_id: u6.id, accepted: true, active: true)
 
-g1 = Game.create(user1_id: u1.id, user2_id: u2.id, user1_score: 0, user2_score: 0, user1_bag: 'a_b_c_d_e_f_*', user2_bag: 'a_b_c_d_e_f_*', accepted: true, active: true)
-g1 = Game.create(user1_id: u1.id, user2_id: u3.id, user1_score: 130, user2_score: 99, user1_bag: 'a_b_c_d_e_f_*', user2_bag: 'a_b_c_d_e_f_*', accepted: true, active: true)
+g1 = Game.create(user1_id: u1.id, user2_id: u2.id, user1_score: 0, user2_score: 0, user1_bag: 'A_B_C_D_E_F_*', user2_bag: 'R_S_T_U_V_W_X', accepted: true, active: true, player1turn: true)
+g2 = Game.create(user1_id: u1.id, user2_id: u3.id, user1_score: 130, user2_score: 99, user1_bag: 'A_B_C_D_E_F_*', user2_bag: 'R_S_T_U_V_W_X', accepted: true, active: true, player1turn: false)
+
+m1 = Move.create(game_id: g1.id, letter: 'H', x: 6, y: 7)
+m2 = Move.create(game_id: g1.id, letter: 'O', x: 7, y: 7)
+m3 = Move.create(game_id: g1.id, letter: 'M', x: 8, y: 7)
+m4 = Move.create(game_id: g1.id, letter: 'E', x: 9, y: 7)
+m5 = Move.create(game_id: g2.id, letter: 'E', x: 9, y: 7)

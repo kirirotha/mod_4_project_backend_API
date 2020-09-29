@@ -9,6 +9,7 @@ class CreateGames < ActiveRecord::Migration[6.0]
       t.string :user2_bag
       t.boolean :accepted
       t.boolean :active
+      t.boolean :player1turn 
 
       t.timestamps
     end
