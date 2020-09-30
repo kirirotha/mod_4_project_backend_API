@@ -12,6 +12,7 @@ class GamesController < ApplicationController
 
     def create
         @game = Game.create(game_params)
+        byebug
         if @game.valid?
             render json: @game, status: :created
         else

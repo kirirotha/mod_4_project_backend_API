@@ -16,7 +16,12 @@ class FriendshipsController < ApplicationController
     end
 
     def create
-
+        @friendship = Friendship.create(friendship_params)
+        if @friendship.valid?
+            render json: @friendship, status: :created
+        else
+            render json: { error: 'failed to create friendship' }, status: :not_acceptable
+        end
     end
 
     def destroy
@@ -26,7 +31,7 @@ class FriendshipsController < ApplicationController
     private
 
     def friendship_params
-        params.require(:friendship).permit(:user1, :user2)
+        params.require(:friendship).permit(:id, :user1_id, :user2_id, :accepted, :active)
     end
 
     def find_friendship
