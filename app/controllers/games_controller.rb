@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-    before_action :find_game, only:[:show, :update]
+    before_action :find_game, only:[:show, :update, :destroy]
 
     def index
         @games = Game.all
@@ -12,7 +12,6 @@ class GamesController < ApplicationController
 
     def create
         @game = Game.create(game_params)
-        byebug
         if @game.valid?
             render json: @game, status: :created
         else
@@ -25,6 +24,12 @@ class GamesController < ApplicationController
         @game.save
         render json: @game, status: :updated
     end
+
+    def destroy
+        @game.destroy
+        render json: { msg: 'game destroyed' }, status: :accepted
+    end
+
 
     private
 

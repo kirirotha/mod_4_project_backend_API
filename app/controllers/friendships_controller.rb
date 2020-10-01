@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-    before_action :find_friendship, only:[:show, :destroy]
+    before_action :find_friendship, only:[:show, :destroy, :update]
 
     def index
         # authenticate!
@@ -24,8 +24,15 @@ class FriendshipsController < ApplicationController
         end
     end
 
-    def destroy
+    def update
+        @friendship.update(friendship_params)
+        @friendship.save
+        render json: @friendship, status: :updated
+    end
 
+    def destroy
+        @friendship.destroy
+        render json: { msg: 'friendship destroyed' }, status: :accepted
     end
 
     private
